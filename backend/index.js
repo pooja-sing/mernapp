@@ -1,7 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db.js');
+
 const User = require('./models/user');
+
+
+const bodyParser = require('body-parser');
+const itemRoutes = require('./routes/itemRoutes');
 
 const app = express();
 
@@ -12,8 +17,12 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
+app.use(bodyParser.json());
+app.use('/api', itemRoutes);
+
+
 // Define routes
-app.get('/', (req, res) => res.send('API running'));
+app.get('/', (req, res) => res.send('props pass parent component to child component'));
 
 
 app.post('/users', async (req, res) => {
